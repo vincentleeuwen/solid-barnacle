@@ -1,5 +1,5 @@
 def hey(phrase):
-    phrase = phrase.replace('\t', '').replace('\n', '').replace(' ', '').replace('\r', '')
+    phrase = phrase.strip()
     if not phrase:
         return 'Fine. Be that way!'
     elif phrase.isupper():
