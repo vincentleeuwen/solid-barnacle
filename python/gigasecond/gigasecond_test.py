@@ -40,6 +40,20 @@ class GigasecondTest(unittest.TestCase):
 
         self.assertEqual(add_gigasecond(your_birthday), your_gigasecond)
 
+    def test_wrong_data_type(self):
+        with self.assertRaisesWithMessage(ValueError):
+            add_gigasecond('foo')
+
+    # Utility functions
+    def setUp(self):
+        try:
+            self.assertRaisesRegex = self.assertRaisesRegexp
+        except AttributeError:
+            pass
+
+    def assertRaisesWithMessage(self, exception):
+        return self.assertRaisesRegex(exception, r".+")
+
 
 if __name__ == '__main__':
     unittest.main()

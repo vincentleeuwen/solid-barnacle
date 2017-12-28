@@ -2,4 +2,7 @@ from datetime import timedelta
 
 
 def add_gigasecond(birth_date):
-    return birth_date + timedelta(seconds=10**9)
+    try:
+        return birth_date + timedelta(seconds=10**9)
+    except TypeError:
+        raise ValueError('Input must be a datetime object')
