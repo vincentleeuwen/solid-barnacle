@@ -1,6 +1,5 @@
 from datetime import date
 from dateutil.relativedelta import relativedelta
-from dateutil.parser import parse
 
 
 def meetup_day(year, month, day_of_the_week, which):
@@ -25,6 +24,6 @@ def meetup_day(year, month, day_of_the_week, which):
 
     # check 1st, 2nd abbrev etc.
     try:
-        return occurances[parse(which).day - 1]
+        return occurances[int(which[0]) - 1]
     except IndexError:
         raise ValueError('This day is not in the month!')
