@@ -7,4 +7,4 @@ def sum_of_squares(number):
 
 
 def difference(number):
-    return abs(square_of_sum(number) - sum_of_squares(number))
+    return square_of_sum(number) - sum_of_squares(number)
