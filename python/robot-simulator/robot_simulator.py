@@ -1,9 +1,11 @@
+import operator
+
 # Globals for the bearings
 # Change the values as you see fit
-WEST = 1
-NORTH = 2
-EAST = 3
-SOUTH = 4
+WEST = 3
+NORTH = 0
+EAST = 1
+SOUTH = 2
 
 
 class Robot(object):
@@ -12,14 +14,10 @@ class Robot(object):
         self.bearing = bearing
 
     def turn_right(self):
-        self.bearing += 1
-        if self.bearing == 5:
-            self.bearing = 1
+        self.bearing = (self.bearing + 1) % 4
 
     def turn_left(self):
-        self.bearing -= 1
-        if self.bearing == 0:
-            self.bearing = 4
+        self.bearing = (self.bearing - 1) % 4
 
     def simulate(self, commands):
         for command in commands:
@@ -33,13 +31,6 @@ class Robot(object):
                 raise ValueError('Unknown command')
 
     def advance(self):
-        self.coordinates = list(self.coordinates)
-        if self.bearing == NORTH:
-            self.coordinates[1] += 1
-        elif self.bearing == SOUTH:
-            self.coordinates[1] -= 1
-        elif self.bearing == WEST:
-            self.coordinates[0] -= 1
-        elif self.bearing == EAST:
-            self.coordinates[0] += 1
-        self.coordinates = tuple(self.coordinates)
+        move = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+        self.coordinates = tuple(
+            map(operator.add, list(move[self.bearing]), list(self.coordinates)))
