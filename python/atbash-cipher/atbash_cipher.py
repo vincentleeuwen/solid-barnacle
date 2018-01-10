@@ -4,7 +4,7 @@ import string
 def encode(plain_text):
     encoded = []
     counter = 0
-    for c in list(plain_text.lower().replace(' ', '')):
+    for c in filter(str.isalnum, plain_text.lower()):
         if c.isalpha():
             counter += 1
             encoded.append(
@@ -19,7 +19,7 @@ def encode(plain_text):
 
 def decode(ciphered_text):
     decoded = []
-    for c in list(ciphered_text.replace(' ', '')):
+    for c in filter(str.isalnum, ciphered_text.lower()):
         if c.isalpha():
             decoded.append(
                 string.ascii_lowercase[::-1][string.ascii_lowercase.index(c)])
