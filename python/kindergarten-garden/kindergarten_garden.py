@@ -3,7 +3,6 @@ class Garden(object):
         'Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Fred', 'Ginny', 'Harriet',
         'Ileana', 'Joseph', 'Kincaid', 'Larry'
     ]
-    # grass, clover, radishes, and violets
     plant_map = {
         'C': 'Clover',
         'G': 'Grass',
@@ -14,8 +13,7 @@ class Garden(object):
 
     def __init__(self, diagram, students=None):
         if students:
-            self.students = students
-            self.students.sort()
+            self.students = sorted(students)
         self.diagram = diagram.split('\n')
 
     def plants(self, student):
