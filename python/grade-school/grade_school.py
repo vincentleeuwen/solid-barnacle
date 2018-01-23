@@ -14,7 +14,7 @@ class School(object):
 
     def sort(self):
         sorted_students = []
-        for grade in self.students.keys():
-            if self.students.get(grade):
-                sorted_students.append((grade, tuple(sorted(self.students[grade]))))
+        for grade, students in self.students.items():
+            if students:
+                sorted_students.append((grade, tuple(sorted(students))))
         return sorted_students
