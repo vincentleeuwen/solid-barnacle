@@ -5,6 +5,39 @@ class BowlingGame(object):
         self.frames = []
 
     def roll(self, pins):
+        self.check_roll(pins)
+        self.frames.append(pins)
+
+    def score(self):
+        self.check_score()
+        score = 0
+        frame_score = 0
+        for index, frame in enumerate(self.frames):
+            frame_score += frame
+            if frame_score == 10 and index < len(self.frames) - 3:
+                frame_score += self.frames[index + 1]
+                if frame == 10:
+                    frame_score += self.frames[index + 2]
+                score += frame_score
+                frame_score = 0
+            if (index + 1) % 2 == 0 or (index + 1) == len(self.frames):
+                score += frame_score
+                frame_score = 0
+        return score
+
+    def check_score(self):
+        if len(self.frames) < 10:
+            raise IndexError()
+        elif len(self.frames) == 19:
+            if self.frames[-1] == 10:
+                raise IndexError()
+        elif len(self.frames) == 20:
+            if self.frames[-1] == 10 and self.frames[-2] == 10:
+                raise IndexError()
+            if self.frames[-1] + self.frames[-2] == 10:
+                raise IndexError()
+
+    def check_roll(self, pins):
         if pins < 0 or pins > 10:
             raise ValueError('Invalid score')
         if len(self.frames) % 2 == 1:
@@ -27,34 +60,3 @@ class BowlingGame(object):
                 pass
             else:
                 raise IndexError()
-
-        self.frames.append(pins)
-
-    def score(self):
-        if len(self.frames) < 10:
-            raise IndexError()
-        elif len(self.frames) == 19:
-            if self.frames[-1] == 10:
-                raise IndexError()
-        elif len(self.frames) == 20:
-            if self.frames[-1] == 10 and self.frames[-2] == 10:
-                raise IndexError()
-            if self.frames[-1] + self.frames[-2] == 10:
-                raise IndexError()
-
-        score = 0
-        frame_score = 0
-        for index, frame in enumerate(self.frames):
-            frame_score += frame
-            if frame_score == 10 and index < len(self.frames) - 3:
-                frame_score += self.frames[index + 1]
-                if frame == 10:
-                    frame_score += self.frames[index + 2]
-                score += frame_score
-                frame_score = 0
-
-            if (index + 1) % 2 == 0 or (index + 1) == len(self.frames):
-                score += frame_score
-                frame_score = 0
-
-        return score
