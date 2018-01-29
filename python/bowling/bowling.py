@@ -47,15 +47,11 @@ class BowlingGame(object):
         for index, frame in enumerate(self.frames):
             frame_score += frame
             if frame_score == 10 and index < len(self.frames) - 3:
-                try:
-                    frame_score += self.frames[index + 1]
-                    if frame == 10:
-                        # strike
-                        frame_score += self.frames[index + 2]
-                    score += frame_score
-                    frame_score = 0
-                except IndexError:
-                    raise IndexError()
+                frame_score += self.frames[index + 1]
+                if frame == 10:
+                    frame_score += self.frames[index + 2]
+                score += frame_score
+                frame_score = 0
 
             if (index + 1) % 2 == 0 or (index + 1) == len(self.frames):
                 score += frame_score
